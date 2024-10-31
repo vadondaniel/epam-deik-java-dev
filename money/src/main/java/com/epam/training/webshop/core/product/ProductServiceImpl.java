@@ -10,12 +10,16 @@ public class ProductServiceImpl implements ProductService {
 
   private static final Currency HUF = Currency.getInstance("HUF");
 
-  private final List<Product> productDb = List.of(
-      new Product("Xiaomi", new Money(100_000, HUF)),
-      new Product("Iphone", new Money(400_000, HUF)),
-      new Product("OnePlus", new Money(410_000, HUF)),
-      new Product("Nokia", new Money(355_000, HUF))
-  );
+  private List<Product> productDb;
+
+  public void initDb() {
+    productDb = List.of(
+        new Product("Xiaomi", new Money(100_000, HUF)),
+        new Product("Iphone", new Money(400_000, HUF)),
+        new Product("OnePlus", new Money(410_000, HUF)),
+        new Product("Nokia", new Money(355_000, HUF))
+    );
+  }
 
   @Override
   public List<Product> getAllProducts() {

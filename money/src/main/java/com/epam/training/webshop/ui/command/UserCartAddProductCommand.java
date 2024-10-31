@@ -1,17 +1,19 @@
 package com.epam.training.webshop.ui.command;
 
+import com.epam.training.webshop.core.cart.Cart;
 import com.epam.training.webshop.core.product.model.Product;
 import com.epam.training.webshop.core.product.ProductService;
-import com.epam.training.webshop.ui.session.Session;
 import java.util.Optional;
 
 public class UserCartAddProductCommand extends AbstractCommand{
 
   private ProductService productService;
+  private Cart cart;
 
-  public UserCartAddProductCommand(ProductService productService) {
+  public UserCartAddProductCommand(ProductService productService, Cart cart) {
     super("user", "cart", "addProduct");
     this.productService = productService;
+    this.cart = cart;
   }
 
   @Override
@@ -24,7 +26,7 @@ public class UserCartAddProductCommand extends AbstractCommand{
     if (product.isEmpty()) {
       return productName + " is not found!";
     } else {
-      Session.INSTANCE.getCart().add(product.get(), amount);
+      cart.add(product.get(), amount);
       return productName + " added to cart!";
     }
   }
