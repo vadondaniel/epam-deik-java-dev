@@ -4,16 +4,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.epam.training.webshop.core.finance.money.Money;
-import com.epam.training.webshop.core.product.ProductService;
-import com.epam.training.webshop.core.product.ProductServiceImpl;
 import com.epam.training.webshop.core.product.model.Product;
 import java.util.Currency;
 import java.util.Optional;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ProductServiceImplTest {
 
-  private final ProductService underTest = new ProductServiceImpl();
+  private ProductServiceImpl underTest;
+
+  @BeforeEach
+  void setUp() {
+    underTest = new ProductServiceImpl();
+    underTest.initDb();
+  }
 
   @Test
   void testGetProductByNameShouldReturnHypoWhenInputProductNameIsHypo() {

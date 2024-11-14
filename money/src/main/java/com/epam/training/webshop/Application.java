@@ -1,15 +1,12 @@
 package com.epam.training.webshop;
 
-import com.epam.training.webshop.ui.interpreter.CommandLineInterpreter;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
 public class Application {
 
   public static void main(String[] args) {
-    AnnotationConfigApplicationContext context =
-        new AnnotationConfigApplicationContext("com.epam.training.webshop");
-    CommandLineInterpreter interpreter =
-        context.getBean(CommandLineInterpreter.class);
-    interpreter.handleUSerInput();
+    SpringApplication.run(Application.class, args);
   }
 }

@@ -18,11 +18,13 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class CheckoutServiceTest {
+class CheckoutServiceTest {
   private static final Currency HUF = Currency.getInstance("HUF");
 
   @Mock
   private GrossPriceCalculator grossPriceCalculator;
+  @Mock
+  private CheckoutObservable checkoutObservable;
   @Mock
   private Cart cart;
 
@@ -40,7 +42,7 @@ public class CheckoutServiceTest {
     when(cart.getAggregatedNetPrice()).thenReturn(new Money(100_000, HUF));
     when(grossPriceCalculator.getAggregatedGrossPrice(cart)).thenReturn(new Money(127_000, HUF));
     //WHEN
-    Order result = underTest.checkout();
+    Order result = underTest.checkout(cart);
     //THEN
     assertEquals(expectedProducts, result.products());
     assertEquals(100_000, result.netPrice().value());

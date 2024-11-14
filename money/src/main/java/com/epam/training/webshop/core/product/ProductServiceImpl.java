@@ -2,6 +2,7 @@ package com.epam.training.webshop.core.product;
 
 import com.epam.training.webshop.core.product.model.Product;
 import com.epam.training.webshop.core.finance.money.Money;
+import java.util.ArrayList;
 import java.util.Currency;
 import java.util.List;
 import java.util.Optional;
@@ -13,12 +14,12 @@ public class ProductServiceImpl implements ProductService {
   private List<Product> productDb;
 
   public void initDb() {
-    productDb = List.of(
+    productDb = new ArrayList<>(List.of(
         new Product("Xiaomi", new Money(100_000, HUF)),
         new Product("Iphone", new Money(400_000, HUF)),
         new Product("OnePlus", new Money(410_000, HUF)),
         new Product("Nokia", new Money(355_000, HUF))
-    );
+    ));
   }
 
   @Override
@@ -31,5 +32,10 @@ public class ProductServiceImpl implements ProductService {
     return productDb.stream()
         .filter(product -> product.getName().equals(name))
         .findFirst();
+  }
+
+  @Override
+  public void createProduct(Product product) {
+    productDb.add(product);
   }
 }

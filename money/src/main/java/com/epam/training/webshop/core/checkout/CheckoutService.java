@@ -10,14 +10,13 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class CheckoutService {
 
-  private final GrossPriceCalculator grossPriceCalculator;
-  private final Cart cart;
+  private final GrossPriceCalculator calculator;
+  private final CheckoutObservable checkoutObservable;
 
-  public Order checkout() {
-    return new Order(
-        cart.getProducts(),
-        cart.getAggregatedNetPrice(),
-         grossPriceCalculator.getAggregatedGrossPrice(cart));
+  public Order checkout(Cart cart) {
+    Order order = new Order(cart.getProducts(), cart.getAggregatedNetPrice(), calculator.getAggregatedGrossPrice(cart));
+    checkoutObservable.notifyObservers(order);
+    return order;
   }
 
 }
