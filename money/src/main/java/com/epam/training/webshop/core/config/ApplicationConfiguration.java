@@ -6,8 +6,6 @@ import com.epam.training.webshop.core.cart.grosspricecalculator.impl.GrossPriceC
 import com.epam.training.webshop.core.cart.grosspricecalculator.impl.HUGrossPriceCalculatorDecorator;
 import com.epam.training.webshop.core.finance.bank.Bank;
 import com.epam.training.webshop.core.finance.bank.StaticBank;
-import com.epam.training.webshop.core.product.ProductService;
-import com.epam.training.webshop.core.product.ProductServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,18 +13,13 @@ import org.springframework.context.annotation.Configuration;
 public class ApplicationConfiguration {
 
   @Bean
-  public Bank bank(){
+  public Bank bank() {
     return new StaticBank();
   }
 
   @Bean
-  public Cart cart(Bank bank){
+  public Cart cart(Bank bank) {
     return Cart.createEmptyCart(bank);
-  }
-
-  @Bean(initMethod = "initDb")
-  public ProductService productService() {
-    return new ProductServiceImpl();
   }
 
   @Bean

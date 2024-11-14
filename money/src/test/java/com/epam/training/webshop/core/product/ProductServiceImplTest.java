@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.epam.training.webshop.core.finance.money.Money;
-import com.epam.training.webshop.core.product.model.Product;
+import com.epam.training.webshop.core.product.model.ProductDto;
 import java.util.Currency;
 import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,9 +23,9 @@ class ProductServiceImplTest {
   @Test
   void testGetProductByNameShouldReturnHypoWhenInputProductNameIsHypo() {
     // Given
-    Product expected = new Product("Xiaomi", new Money(100_000, Currency.getInstance("HUF")));
+    ProductDto expected = new ProductDto("Xiaomi", new Money(100_000, Currency.getInstance("HUF")));
     // When
-    Optional<Product> actual = underTest.getProductByName("Xiaomi");
+    Optional<ProductDto> actual = underTest.getProductByName("Xiaomi");
     // Then
     assertTrue(actual.isPresent());
     assertEquals(expected, actual.get());
@@ -34,9 +34,9 @@ class ProductServiceImplTest {
   @Test
   void testGetProductByNameShouldReturnOptionalEmptyWhenInputProductNameDoesNotExist() {
     // Given
-    Optional<Product> expected = Optional.empty();
+    Optional<ProductDto> expected = Optional.empty();
     // When
-    Optional<Product> actual = underTest.getProductByName("Liszt");
+    Optional<ProductDto> actual = underTest.getProductByName("Liszt");
     // Then
     assertTrue(actual.isEmpty());
     assertEquals(expected, actual);
@@ -45,9 +45,9 @@ class ProductServiceImplTest {
   @Test
   void testGetProductByNameShouldReturnOptionalEmptyWhenInputProductNameIsNull() {
     // Given
-    Optional<Product> expected = Optional.empty();
+    Optional<ProductDto> expected = Optional.empty();
     // When
-    Optional<Product> actual = underTest.getProductByName(null);
+    Optional<ProductDto> actual = underTest.getProductByName(null);
     // Then
     assertTrue(actual.isEmpty());
     assertEquals(expected, actual);

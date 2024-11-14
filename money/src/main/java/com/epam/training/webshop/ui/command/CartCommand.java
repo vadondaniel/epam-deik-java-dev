@@ -4,7 +4,7 @@ import com.epam.training.webshop.core.cart.Cart;
 import com.epam.training.webshop.core.checkout.CheckoutService;
 import com.epam.training.webshop.core.checkout.model.Order;
 import com.epam.training.webshop.core.product.ProductService;
-import com.epam.training.webshop.core.product.model.Product;
+import com.epam.training.webshop.core.product.model.ProductDto;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.shell.standard.ShellComponent;
@@ -20,7 +20,7 @@ public class CartCommand {
 
   @ShellMethod(key = "user cart addProduct", value = "Add product to the cart!")
   protected String userAddProductToCart(String productName, int amount) {
-    Optional<Product> product = productService.getProductByName(productName);
+    Optional<ProductDto> product = productService.getProductByName(productName);
 
     if (product.isEmpty()) {
       return productName + " is not found!";
@@ -56,7 +56,7 @@ public class CartCommand {
 
   @ShellMethod(key = "user cart removeProduct", value = "Remove product from cart!")
   protected String removeProductFromCart(String productName) {
-    Optional<Product> product = productService.getProductByName(productName);
+    Optional<ProductDto> product = productService.getProductByName(productName);
     if (product.isEmpty()) {
       return productName + " is not found!";
     }

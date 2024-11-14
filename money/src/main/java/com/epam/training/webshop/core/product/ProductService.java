@@ -1,14 +1,15 @@
 package com.epam.training.webshop.core.product;
 
-import com.epam.training.webshop.core.product.model.Product;
+import com.epam.training.webshop.core.product.model.ProductDto;
 import java.util.List;
 import java.util.Optional;
 
 public interface ProductService {
 
-  List<Product> getAllProducts();
+  List<ProductDto> getAllProducts();
 
-  Optional<Product> getProductByName(String name);
+  Optional<ProductDto> getProductByName(String name);
+  Optional<ProductDto> getProductById(Long id);
 
-  void createProduct(Product product);
+  void createProduct(ProductDto product);
 }

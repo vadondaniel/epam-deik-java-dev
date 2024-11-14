@@ -8,8 +8,7 @@ import static org.mockito.Mockito.verifyNoInteractions;
 
 import com.epam.training.webshop.core.finance.bank.Bank;
 import com.epam.training.webshop.core.finance.money.Money;
-import com.epam.training.webshop.core.product.model.Product;
-import com.epam.training.webshop.core.cart.Cart;
+import com.epam.training.webshop.core.product.model.ProductDto;
 import java.util.Currency;
 import org.junit.jupiter.api.Test;
 
@@ -31,7 +30,7 @@ class CartTest {
   @Test
   void testAddProductShouldStoreTheProductWhenItIsNotNull() {
     // Given
-    Product product = new Product("productName", new Money(10, HUF_CURRENCY));
+    ProductDto product = new ProductDto("productName", new Money(10, HUF_CURRENCY));
     // When
     underTest.add(product, 1);
     // Then
@@ -54,7 +53,7 @@ class CartTest {
   @Test
   void testGetAggregatedNetPriceShouldReturnCorrectPriceWhenOneItemInTheCart() {
     // Given
-    Product product = new Product("productName", new Money(10, HUF_CURRENCY));
+    ProductDto product = new ProductDto("productName", new Money(10, HUF_CURRENCY));
     underTest.add(product, 10);
     // When
     Money result = underTest.getAggregatedNetPrice();
