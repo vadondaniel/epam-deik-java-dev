@@ -2,6 +2,7 @@ package com.epam.training.webshop.core.user;
 
 import com.epam.training.webshop.core.user.model.UserDto;
 import com.epam.training.webshop.core.user.persistence.User;
+import com.epam.training.webshop.core.user.persistence.User.Role;
 import com.epam.training.webshop.core.user.persistence.UserRepository;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -38,7 +39,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public void registerUser(String username, String password) {
-    User user = new User(username, password, User.Role.USER);
+    User user = new User(username, password, Role.USER);
     userRepository.save(user);
   }
 }

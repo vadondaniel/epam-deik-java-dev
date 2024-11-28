@@ -2,7 +2,7 @@ package com.epam.training.webshop.ui.command;
 
 import com.epam.training.webshop.core.cart.Cart;
 import com.epam.training.webshop.core.checkout.CheckoutService;
-import com.epam.training.webshop.core.checkout.model.Order;
+import com.epam.training.webshop.core.checkout.order.model.OrderDto;
 import com.epam.training.webshop.core.product.ProductService;
 import com.epam.training.webshop.core.product.model.ProductDto;
 import java.util.Optional;
@@ -35,8 +35,8 @@ public class CartCommand {
     if (cart.isEmpty()) {
       return "Cart is empty!";
     } else {
-      Order order = checkoutService.checkout(cart);
-      return "Your order: " + order;
+      OrderDto orderDto = checkoutService.checkout(cart);
+      return "Your order: " + orderDto;
     }
   }
 

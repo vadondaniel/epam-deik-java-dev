@@ -5,7 +5,7 @@ import static org.mockito.Mockito.when;
 
 import com.epam.training.webshop.core.cart.Cart;
 import com.epam.training.webshop.core.cart.grosspricecalculator.GrossPriceCalculator;
-import com.epam.training.webshop.core.checkout.model.Order;
+import com.epam.training.webshop.core.checkout.order.model.OrderDto;
 import com.epam.training.webshop.core.finance.money.Money;
 import com.epam.training.webshop.core.product.model.ProductDto;
 import java.util.Currency;
@@ -42,7 +42,7 @@ class CheckoutServiceTest {
     when(cart.getAggregatedNetPrice()).thenReturn(new Money(100_000, HUF));
     when(grossPriceCalculator.getAggregatedGrossPrice(cart)).thenReturn(new Money(127_000, HUF));
     //WHEN
-    Order result = underTest.checkout(cart);
+    OrderDto result = underTest.checkout(cart);
     //THEN
     assertEquals(expectedProducts, result.products());
     assertEquals(100_000, result.netPrice().value());
