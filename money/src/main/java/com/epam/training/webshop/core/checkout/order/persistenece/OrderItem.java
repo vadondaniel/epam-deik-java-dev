@@ -14,4 +14,6 @@ public class OrderItem {
   public OrderItem(String name) {
     this.name = name;
   }
+  public OrderItem() {
+  }
 }

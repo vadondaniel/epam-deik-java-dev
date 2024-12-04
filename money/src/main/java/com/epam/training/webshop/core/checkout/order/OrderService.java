@@ -29,7 +29,7 @@ public class OrderService implements CheckoutObserver {
     UserDto userDto = userService.describe()
         .orElseThrow(() -> new IllegalArgumentException("User must log in first!"));
     User user = userRepository.findByUsername(userDto.username())
-        .orElseThrow(() -> new InvalidIsolationLevelException("No such user."));
+        .orElseThrow(() -> new IllegalArgumentException("No such user."));
     Order order = new Order(user, createOrderItemList(orderDto.products()));
     orderRepository.save(order);
   }

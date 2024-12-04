@@ -13,6 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Orders")
+
 public class Order {
 
   @Id
@@ -28,5 +29,8 @@ public class Order {
   public Order(User user, List<OrderItem> orderItemList) {
     this.user = user;
     this.orderItemList = orderItemList;
+  }
+
+  public Order() {
   }
 }
