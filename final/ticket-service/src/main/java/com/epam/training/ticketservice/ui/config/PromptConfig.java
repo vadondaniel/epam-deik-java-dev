@@ -9,6 +9,6 @@ public class PromptConfig implements PromptProvider {
 
     @Override
     public AttributedString getPrompt() {
-        return new AttributedString("Ticket>");
+        return new AttributedString("Ticket service>");
     }
 }
