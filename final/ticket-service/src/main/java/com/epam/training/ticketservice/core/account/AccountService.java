@@ -17,4 +17,6 @@ public interface AccountService {
     void signUp(String username, String password);
 
     void createAdminAccount();
+
+    boolean isAdmin();
 }
