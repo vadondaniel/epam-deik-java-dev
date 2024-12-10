@@ -1,4 +1,4 @@
-package com.epam.training.ticketservice.core.ui.command;
+package com.epam.training.ticketservice.ui.command;
 
 import com.epam.training.ticketservice.core.account.AccountService;
 import lombok.AllArgsConstructor;
