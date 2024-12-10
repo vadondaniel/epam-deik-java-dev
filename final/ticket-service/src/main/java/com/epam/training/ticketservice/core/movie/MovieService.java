@@ -13,4 +13,6 @@ public interface MovieService {
     void deleteMovie(String title);
 
     Optional<List<MovieDto>> listMovies();
+
+    Optional<MovieDto> findByTitle(String title);
 }

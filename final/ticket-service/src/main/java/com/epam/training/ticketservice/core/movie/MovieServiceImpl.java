@@ -52,4 +52,10 @@ public class MovieServiceImpl implements MovieService {
                 .collect(Collectors.toList());
         return Optional.of(movieDtos);
     }
+
+    @Override
+    public Optional<MovieDto> findByTitle(String title) {
+        return movieRepository.findByTitle(title)
+                .map(movie -> new MovieDto(movie.getTitle(), movie.getGenre(), movie.getLength()));
+    }
 }

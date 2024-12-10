@@ -14,4 +14,6 @@ public interface RoomService {
     void deleteRoom(String roomName);
 
     Optional<List<RoomDto>> listRooms();
+
+    Optional<RoomDto> findByName(String roomName);
 }

@@ -1,7 +1,6 @@
 package com.epam.training.ticketservice.ui.command;
 
 import com.epam.training.ticketservice.core.account.AccountService;
-import com.epam.training.ticketservice.core.movie.model.MovieDto;
 import com.epam.training.ticketservice.core.room.RoomService;
 import com.epam.training.ticketservice.core.room.model.RoomDto;
 import lombok.AllArgsConstructor;
@@ -52,7 +51,7 @@ public class RoomCommand {
         }
         StringBuilder result = new StringBuilder();
         for (RoomDto room : rooms) {
-            result.append(String.format("Room %s with %d seats, %d rows and %d columns%n", room.name(), room.columns()*room.rows(), room.rows(), room.columns()));
+            result.append(String.format("Room %s with %d seats, %d rows and %d columns%n", room.name(), room.columns() * room.rows(), room.rows(), room.columns()));
         }
         return result.toString().trim();
     }

@@ -1,5 +1,6 @@
 package com.epam.training.ticketservice.core.room;
 
+import com.epam.training.ticketservice.core.movie.model.MovieDto;
 import com.epam.training.ticketservice.core.room.model.RoomDto;
 import com.epam.training.ticketservice.core.room.persistence.Room;
 import com.epam.training.ticketservice.core.room.persistence.RoomRepository;
@@ -51,5 +52,11 @@ public class RoomServiceImpl implements RoomService {
                 .map(room -> new RoomDto(room.getName(), room.getRows(), room.getColumns()))
                 .collect(Collectors.toList());
         return Optional.of(roomDtos);
+    }
+
+    @Override
+    public Optional<RoomDto> findByName(String roomName) {
+        return roomRepository.findByName(roomName)
+                .map(room -> new RoomDto(room.getName(), room.getRows(), room.getColumns()));
     }
 }
