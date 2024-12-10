@@ -9,10 +9,10 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class InMemoryDatabaseInitializer {
 
-    private final AccountRepository userRepository;
+    private final AccountRepository accountRepository;
 
     public void init() {
         Account admin = new Account("admin", "admin", Account.Role.ADMIN);
-        userRepository.save(admin);
+        accountRepository.save(admin);
     }
 }
