@@ -1,5 +1,6 @@
 package com.epam.training.ticketservice.ui.command;
 
+import com.epam.training.ticketservice.core.account.AccountService;
 import com.epam.training.ticketservice.core.movie.MovieService;
 import com.epam.training.ticketservice.core.movie.model.MovieDto;
 import com.epam.training.ticketservice.core.screening.ScreeningService;
@@ -19,26 +20,35 @@ public class ScreeningCommand {
 
     private final ScreeningService screeningService;
     private final MovieService movieService;
+    private final AccountService accountService;
 
     @ShellMethod(key = "create screening", value = "Create a new screening")
     public String createScreening(String movieTitle, String roomName, String start) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        try {
-            LocalDateTime startTime = LocalDateTime.parse(start, formatter);
-            return screeningService.createScreening(movieTitle, roomName, startTime);
-        } catch (DateTimeParseException e) {
-            return "Invalid date and time format. Please use YYYY-MM-DD HH:mm";
+        if (accountService.isAdmin()) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            try {
+                LocalDateTime startTime = LocalDateTime.parse(start, formatter);
+                return screeningService.createScreening(movieTitle, roomName, startTime);
+            } catch (DateTimeParseException e) {
+                return "Invalid date and time format. Please use YYYY-MM-DD HH:mm";
+            }
+        } else {
+            return "You need to be an admin to create a screening";
         }
     }
 
     @ShellMethod(key = "delete screening", value = "Delete a screening")
     public void deleteScreening(String movieTitle, String roomName, String start) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        try {
-            LocalDateTime startTime = LocalDateTime.parse(start, formatter);
-            screeningService.deleteScreening(movieTitle, roomName, startTime);
-        } catch (DateTimeParseException e) {
-            System.out.println("Invalid date and time format. Please use YYYY-MM-DD HH:mm");
+        if (accountService.isAdmin()) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            try {
+                LocalDateTime startTime = LocalDateTime.parse(start, formatter);
+                screeningService.deleteScreening(movieTitle, roomName, startTime);
+            } catch (DateTimeParseException e) {
+                System.out.println("Invalid date and time format. Please use YYYY-MM-DD HH:mm");
+            }
+        } else {
+            System.out.println("You need to be an admin to delete a screening");
         }
     }
 
