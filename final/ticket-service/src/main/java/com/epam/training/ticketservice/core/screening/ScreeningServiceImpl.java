@@ -46,7 +46,8 @@ public class ScreeningServiceImpl implements ScreeningService {
 
     @Override
     public void deleteScreening(String movieTitle, String roomName, LocalDateTime screeningTime) {
-        Optional<Screening> screening = screeningRepository.findByMovieTitleAndRoomNameAndStartTime(movieTitle, roomName, screeningTime);
+        Optional<Screening> screening = screeningRepository
+                .findByMovieTitleAndRoomNameAndStartTime(movieTitle, roomName, screeningTime);
         if (screening.isPresent()) {
             screeningRepository.delete(screening.get());
         }
@@ -59,9 +60,19 @@ public class ScreeningServiceImpl implements ScreeningService {
             return Optional.empty();
         }
         List<ScreeningDto> screeningDtos = screenings.stream()
-                .map(screening -> new ScreeningDto(screening.getMovieTitle(), screening.getRoomName(), screening.getStartTime()))
+                .map(screening -> new ScreeningDto(
+                        screening.getMovieTitle(),
+                        screening.getRoomName(),
+                        screening.getStartTime()))
                 .collect(Collectors.toList());
         return Optional.of(screeningDtos);
+    }
+
+    @Override
+    public Optional<ScreeningDto> findScreening(String movieTitle, String roomName, LocalDateTime startTime) {
+        Optional<Screening> screening = screeningRepository
+                .findByMovieTitleAndRoomNameAndStartTime(movieTitle, roomName, startTime);
+        return screening.map(s -> new ScreeningDto(s.getMovieTitle(), s.getRoomName(), s.getStartTime()));
     }
 
     private boolean isOverlapping(String roomName, LocalDateTime startTime, int movieLength) {
@@ -70,7 +81,8 @@ public class ScreeningServiceImpl implements ScreeningService {
 
         for (Screening screening : screenings) {
             LocalDateTime existingStartTime = screening.getStartTime();
-            LocalDateTime existingEndTime = existingStartTime.plusMinutes(movieService.findByTitle(screening.getMovieTitle()).get().length());
+            LocalDateTime existingEndTime = existingStartTime
+                    .plusMinutes(movieService.findByTitle(screening.getMovieTitle()).get().length());
 
             if (!(startTime.isAfter(existingEndTime) || endTime.isBefore(existingStartTime))) {
                 return true;
@@ -85,7 +97,8 @@ public class ScreeningServiceImpl implements ScreeningService {
 
         for (Screening screening : screenings) {
             LocalDateTime existingStartTime = screening.getStartTime();
-            LocalDateTime existingEndTime = existingStartTime.plusMinutes(movieService.findByTitle(screening.getMovieTitle()).get().length());
+            LocalDateTime existingEndTime = existingStartTime
+                    .plusMinutes(movieService.findByTitle(screening.getMovieTitle()).get().length());
             LocalDateTime breakEndTime = existingEndTime.plusMinutes(10);
             LocalDateTime breakStartTime = existingStartTime.minusMinutes(10);
 

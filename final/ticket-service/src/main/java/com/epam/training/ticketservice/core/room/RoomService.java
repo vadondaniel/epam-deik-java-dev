@@ -1,5 +1,6 @@
 package com.epam.training.ticketservice.core.room;
 
+import com.epam.training.ticketservice.core.booking.model.SeatDto;
 import com.epam.training.ticketservice.core.room.model.RoomDto;
 
 import java.util.List;
@@ -16,4 +17,6 @@ public interface RoomService {
     Optional<List<RoomDto>> listRooms();
 
     Optional<RoomDto> findByName(String roomName);
+
+    boolean doesSeatExist(String roomName, SeatDto seat);
 }

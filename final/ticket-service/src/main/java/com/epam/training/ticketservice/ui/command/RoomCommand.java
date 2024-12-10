@@ -51,7 +51,8 @@ public class RoomCommand {
         }
         StringBuilder result = new StringBuilder();
         for (RoomDto room : rooms) {
-            result.append(String.format("Room %s with %d seats, %d rows and %d columns%n", room.name(), room.columns() * room.rows(), room.rows(), room.columns()));
+            result.append(String.format("Room %s with %d seats, %d rows and %d columns%n",
+                    room.name(), room.columns() * room.rows(), room.rows(), room.columns()));
         }
         return result.toString().trim();
     }

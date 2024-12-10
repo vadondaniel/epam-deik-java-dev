@@ -12,4 +12,6 @@ public interface ScreeningService {
     void deleteScreening(String movieTitle, String roomName, LocalDateTime screeningTime);
 
     Optional<List<ScreeningDto>> listScreenings();
+
+    Optional<ScreeningDto> findScreening(String movieTitle, String roomName, LocalDateTime startTime);
 }

@@ -1,5 +1,6 @@
 package com.epam.training.ticketservice.core.room;
 
+import com.epam.training.ticketservice.core.booking.model.SeatDto;
 import com.epam.training.ticketservice.core.movie.model.MovieDto;
 import com.epam.training.ticketservice.core.room.model.RoomDto;
 import com.epam.training.ticketservice.core.room.persistence.Room;
@@ -58,5 +59,15 @@ public class RoomServiceImpl implements RoomService {
     public Optional<RoomDto> findByName(String roomName) {
         return roomRepository.findByName(roomName)
                 .map(room -> new RoomDto(room.getName(), room.getRows(), room.getColumns()));
+    }
+
+    @Override
+    public boolean doesSeatExist(String roomName, SeatDto seat) {
+        Optional<Room> roomOptional = roomRepository.findByName(roomName);
+        if (roomOptional.isPresent()) {
+            Room room = roomOptional.get();
+            return seat.row() <= room.getRows() && seat.column() <= room.getColumns();
+        }
+        return false;
     }
 }

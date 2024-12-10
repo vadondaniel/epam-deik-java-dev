@@ -2,6 +2,7 @@ package com.epam.training.ticketservice.core.account;
 
 import com.epam.training.ticketservice.core.account.model.AccountDto;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface AccountService {
@@ -19,4 +20,6 @@ public interface AccountService {
     void createAdminAccount();
 
     boolean isAdmin();
+
+    String book(String movieTitle, String roomName, String startTime, List<String> seats);
 }
