@@ -42,10 +42,8 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Optional<AccountDto> signOut() {
-        Optional<AccountDto> previouslySignedInAccount = describe();
+    public void signOut() {
         signedInAccount = null;
-        return previouslySignedInAccount;
     }
 
     @Override

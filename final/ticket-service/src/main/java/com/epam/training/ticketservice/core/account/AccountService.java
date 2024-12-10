@@ -10,7 +10,7 @@ public interface AccountService {
 
     Optional<AccountDto> signInPrivileged(String username, String password);
 
-    Optional<AccountDto> signOut();
+    void signOut();
 
     Optional<AccountDto> describe();
 
