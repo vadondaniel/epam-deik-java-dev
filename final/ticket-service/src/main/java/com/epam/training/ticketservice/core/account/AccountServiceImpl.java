@@ -64,4 +64,11 @@ public class AccountServiceImpl implements AccountService {
             accountRepository.save(adminAccount);
         }
     }
+
+    @Override
+    public boolean isAdmin() {
+        return describe()
+                .map(accountDto -> accountDto.role() == Account.Role.ADMIN)
+                .orElse(false);
+    }
 }
