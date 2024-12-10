@@ -32,8 +32,18 @@ public class AccountCommand {
 
     @ShellMethod(key = "describe account", value = "Get account information")
     public String describe() {
-        return accountService.describe()
-                .map(accountDto -> "Signed in with privileged account '" + accountDto.username() + "'")
-                .orElse("You are not signed in");
+        var accountDescription = accountService.describe();
+        if (accountService.isAdmin()) {
+            return "Signed in with privileged account '" + accountDescription.get().username() + "'";
+        } else {
+            return accountDescription
+                    .map(accountDto -> "Signed in with account '" + accountDto.username() + "'")
+                    .orElse("You are not signed in");
+        }
+    }
+
+    @ShellMethod(key = "sign up", value = "Sign up with a new account")
+    public void signUp(String username, String password) {
+        accountService.signUp(username, password);
     }
 }
