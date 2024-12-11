@@ -85,7 +85,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public String book(String movieTitle, String roomName, String startTime, List<String> seats) {
-        if (!(signedInAccount.role() == Account.Role.USER)) {
+        if (signedInAccount == null || signedInAccount.role() != Account.Role.USER) {
             return "Booking is only available for signed-in users.";
         }
 
